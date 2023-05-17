@@ -36,6 +36,12 @@ After that Minion can be installed:
 flatpak --user install gg.minion.Minion
 ```
 
+And ran with:
+
+```bash
+flatpak run gg.minion.Minion
+```
+
 ## Building and runnning
 
 Building:
