@@ -10,6 +10,7 @@ finish-args:
   - --socket=x11
   - --share=network
   - --persist=.minion
+  - --filesystem=~/.steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
   - --filesystem=~/Games
 modules:
