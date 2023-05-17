@@ -20,23 +20,23 @@
   <screenshots>
     <screenshot type="default">
       <caption>The installed screen</caption>
-      <image type="source">https://raw.githubusercontent.com/zastrixarundell/flathub/gg.minion.Minion/screenshots/installed.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/gg.minion.Minion/master/screenshots/installed.png</image>
     </screenshot>
     <screenshot>
       <caption>The find screen</caption>
-      <image type="source">https://raw.githubusercontent.com/zastrixarundell/flathub/gg.minion.Minion/screenshots/find.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/gg.minion.Minion/master/screenshots/find.png</image>
     </screenshot>
     <screenshot>
       <caption>The search menu</caption>
-      <image type="source">https://raw.githubusercontent.com/zastrixarundell/flathub/gg.minion.Minion/screenshots/search.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/gg.minion.Minion/master/screenshots/search.png</image>
     </screenshot>
     <screenshot>
       <caption>Backup</caption>
-      <image type="source">https://raw.githubusercontent.com/zastrixarundell/flathub/gg.minion.Minion/screenshots/backup.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/gg.minion.Minion/master/screenshots/backup.png</image>
     </screenshot>
     <screenshot>
       <caption>Archived Backup</caption>
-      <image type="source">https://raw.githubusercontent.com/zastrixarundell/flathub/gg.minion.Minion/screenshots/archived-backup.png</image>
+      <image type="source">https://raw.githubusercontent.com/flathub/gg.minion.Minion/master/screenshots/archived-backup.png</image>
     </screenshot>
   </screenshots>
   <content_rating type="oars-1.1">
