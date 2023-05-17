@@ -22,6 +22,26 @@ This version of Minion is using Java. As it requires JavaFX and it's not provide
 
 It is also compatible with a flatpak installation of ESO through flatpak Steam and hopefully Lutris.
 
+## Installing (preffered way)
+
+The preffered way to install Minion is to install it via flathub. To add flathub to your system you need to run:
+
+```bash
+flatpak remote-add --if-not-exists flathub https://flathub.org/repo/flathub.flatpakrepo
+```
+
+After that Minion can be installed:
+
+```bash
+flatpak --user install gg.minion.Minion
+```
+
+And ran with:
+
+```bash
+flatpak run gg.minion.Minion
+```
+
 ## Building and runnning
 
 Building:
