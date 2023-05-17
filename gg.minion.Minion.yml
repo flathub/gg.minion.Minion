@@ -11,6 +11,7 @@ finish-args:
   - --share=network
   - --persist=.minion
   - --filesystem=~/.steam
+  - --filesystem=~/.local/share/Steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
   - --filesystem=~/Games
 modules:
