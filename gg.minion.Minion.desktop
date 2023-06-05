@@ -4,5 +4,5 @@ Comment=Premier Addon Management
 Exec=minion.sh
 Type=Application
 Icon=gg.minion.Minion
-Categories=Game;
+Categories=Game;Utility;
 Keywords=game;eso;wow;addons;mods;
