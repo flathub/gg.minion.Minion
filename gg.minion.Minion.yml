@@ -3,6 +3,8 @@ runtime: org.freedesktop.Platform
 runtime-version: '22.08'
 command: minion.sh
 sdk: org.freedesktop.Sdk
+sdk-extensions:
+  - org.freedesktop.Sdk.Extension.openjdk17
 tags:
   - proprietary
 finish-args:
@@ -15,21 +17,24 @@ finish-args:
   - --filesystem=~/.var/app/com.valvesoftware.Steam
   - --filesystem=~/Games
 modules:
-  # Liberica JDK for running Minion as it supports OpenJFX out of the box
-  - name: java-11-runtime
+  - name: openjdk
     buildsystem: simple
     build-commands:
-      - mkdir -p             /app/jre
-      - cp -r {bin,lib,conf} /app/jre
+      - /usr/lib/sdk/openjdk17/install.sh
+  - name: openjfx
+    buildsystem: simple
+    build-commands:
+      - mkdir -p  /app/javafx
+      - cp -r lib /app/javafx
     sources:
       - type: archive
-        url: https://download.bell-sw.com/java/11.0.17+7/bellsoft-jre11.0.17+7-linux-amd64-full.tar.gz
-        sha256: f3578ddb8fc53053d6c12507c7235e777d6a104d85f8b104fa043c81978d0cb9
+        url: https://download2.gluonhq.com/openjfx/17.0.7/openjfx-17.0.7_linux-x64_bin-sdk.zip
+        sha256: 4a2a13ef86b3a89a54f6420ef6bb0f4b111ad3adf1111c59760474a41e2a8bed
         only-arches:
           - x86_64
       - type: archive
-        url: https://download.bell-sw.com/java/11.0.17+7/bellsoft-jre11.0.17+7-linux-aarch64-full.tar.gz
-        sha256: 2a2269e04716ddfb29404a3c5ba8a766b744dbac16c8df9c879adf3ea308d942
+        url: https://download2.gluonhq.com/openjfx/17.0.7/openjfx-17.0.7_linux-aarch64_bin-sdk.zip
+        sha256: 8c8ee1bd13b8cde8f980b869cfc7efd1f73c5a8d32b29142761324f60d709e1e
         only-arches:
           - aarch64
   - name: minion
@@ -68,7 +73,15 @@ modules:
         commands:
           # If someone does press udpate it won't create a null folder + it won't hang the application
           - cd /tmp
-          - java -jar /app/extra/Minion-jfx.jar
+          - "java -jar --module-path /app/javafx/lib --add-modules=javafx.swing,javafx.graphics,javafx.fxml,javafx.media,javafx.web \
+              --add-reads javafx.graphics=ALL-UNNAMED \
+              --add-opens javafx.graphics/javafx.scene.image=ALL-UNNAMED \
+              --add-opens javafx.graphics/com.sun.javafx.iio=ALL-UNNAMED \
+              --add-opens javafx.graphics/com.sun.javafx.iio.common=ALL-UNNAMED \
+              --add-opens javafx.graphics/com.sun.javafx.css=ALL-UNNAMED \
+              --add-opens javafx.base/com.sun.javafx.runtime=ALL-UNNAMED \
+              --add-opens java.base/java.lang=ALL-UNNAMED \
+              /app/extra/Minion-jfx.jar"
       - type: file
         path: gg.minion.Minion.png
       - type: file
