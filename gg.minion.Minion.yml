@@ -73,7 +73,8 @@ modules:
         commands:
           # If someone does press udpate it won't create a null folder + it won't hang the application
           - cd /tmp
-          - "java -jar --module-path /app/javafx/lib --add-modules=javafx.graphics,javafx.fxml,javafx.web \
+          - "java -jar --module-path /app/javafx/lib \
+              --add-modules=javafx.graphics,javafx.fxml,javafx.web \
               --add-reads javafx.graphics=ALL-UNNAMED \
               --add-opens javafx.graphics/javafx.scene.image=ALL-UNNAMED \
               --add-opens javafx.graphics/com.sun.javafx.css=ALL-UNNAMED \
