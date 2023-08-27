@@ -14,6 +14,7 @@ finish-args:
   - --filesystem=~/.local/share/Steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
   - --filesystem=~/Games
+  - --filesystem=xdg-documents/Elder Scrolls Online
 modules:
   # Liberica JDK for running Minion as it supports OpenJFX out of the box
   - name: java-11-runtime
