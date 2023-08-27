@@ -10,10 +10,14 @@ finish-args:
   - --socket=x11
   - --share=network
   - --persist=.minion
+  # Steam-specific folders
   - --filesystem=~/.steam
-  - --filesystem=~/.local/share/Steam
+  - --filesystem=xdg-data/Steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
+  # Lutris installations
   - --filesystem=~/Games
+  # Heroic games launcher installation
+  - --filesystem=xdg-documents/Elder Scrolls Online
 modules:
   # Liberica JDK for running Minion as it supports OpenJFX out of the box
   - name: java-11-runtime
