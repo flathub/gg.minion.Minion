@@ -57,13 +57,6 @@ modules:
           url: https://minion.mmoui.com/?download
           pattern: "href=\"(https://cdn.mmoui.com/minion/v3/(Minion\\d+.\\d+.\\d+)-java.zip)\""
       - type: script
-        dest-filename: apply-extra
-        commands:
-          - unzip -q Minion.zip
-          - mv Minion*-java/* .
-          - rm -rf __MACOSX Minion*-java
-          - rm Minion.zip
-      - type: script
         dest-filename: minion.sh
         commands:
           # If someone does press udpate it will create the /tmp/null
