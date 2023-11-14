@@ -51,16 +51,10 @@ modules:
       - type: archive
         url: https://cdn.mmoui.com/minion/v3/Minion3.0.11-java.zip
         sha256: 7ed2a5804462b6dec7d0f4f7b1b96b9279b71ed81939ef03f65f28d9e1c72e1e
-        # Not using x-checker-data as the used version here is NOT available on the site
-        # but it IS added by the developers exclusively for the flatpak.
-        #
-        # The version for Minion3 will not change as the developers are working on Minion4
-        # and the flatpak will need to be manually updated for Minion4 support when it comes out.
-        #
-        # x-checker-data:
-        #   type: html
-        #   url: https://minion.mmoui.com/?download
-        #   pattern: "href=\"(https://cdn.mmoui.com/minion/v3/(Minion\\d+.\\d+.\\d+)-java.zip)\""
+        x-checker-data:
+          type: html
+          url: https://minion.mmoui.com/?download
+          pattern: "href=\"(https://cdn.mmoui.com/minion/v3/(Minion\\d+.\\d+.\\d+)-java.zip)\""
       - type: script
         dest-filename: apply-extra
         commands:
