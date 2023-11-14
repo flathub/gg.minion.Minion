@@ -65,7 +65,10 @@ modules:
       - type: script
         dest-filename: minion.sh
         commands:
-          # If someone does press udpate it won't create a null folder + it won't hang the application
+          # If someone does press udpate it will create the /tmp/null
+          # folder but it won't hang the application as it's still in the
+          # mutable part of the sandbox. This is only here for the
+          # small amount of time before the automatic update kicks in.
           - cd /tmp
           - java -jar /app/bin/minion.jar
       - type: file
