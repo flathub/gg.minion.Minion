@@ -1,6 +1,6 @@
 app-id: gg.minion.Minion
 runtime: org.freedesktop.Platform
-runtime-version: '22.08'
+runtime-version: '23.08'
 command: minion.sh
 sdk: org.freedesktop.Sdk
 sdk-extensions:
@@ -10,12 +10,17 @@ tags:
 finish-args:
   - --env=PATH=/app/jre/bin:/app/bin
   - --socket=x11
+  - --share=ipc
   - --share=network
   - --persist=.minion
+  # Steam-specific folders
   - --filesystem=~/.steam
-  - --filesystem=~/.local/share/Steam
+  - --filesystem=xdg-data/Steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
+  # Lutris installations
   - --filesystem=~/Games
+  # Heroic games launcher installation
+  - --filesystem=xdg-documents/Elder Scrolls Online
 modules:
   - name: openjdk
     buildsystem: simple
@@ -40,38 +45,29 @@ modules:
   - name: minion
     buildsystem: simple
     build-commands:
-      - install -Dm755 apply-extra                ${FLATPAK_DEST}/bin/apply_extra
-      - install -Dm755 minion.sh                  ${FLATPAK_DEST}/bin/minion.sh
-      - install -Dm644 ${FLATPAK_ID}.png          ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
-      - install -Dm644 ${FLATPAK_ID}.desktop      ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
-      - install -Dm644 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
+      - rm -rf __MACOSX Minion*-java
+      - install -Dm555 Minion-jfx.jar             ${FLATPAK_DEST}/bin/minion.jar
+      - mkdir -p                                  ${FLATPAK_DEST}/bin/lib
+      - install -Dm555 lib/*                      ${FLATPAK_DEST}/bin/lib
+      - install -Dm555 minion.sh                  ${FLATPAK_DEST}/bin/minion.sh
+      - install -Dm444 ${FLATPAK_ID}.png          ${FLATPAK_DEST}/share/icons/hicolor/256x256/apps/${FLATPAK_ID}.png
+      - install -Dm444 ${FLATPAK_ID}.desktop      ${FLATPAK_DEST}/share/applications/${FLATPAK_ID}.desktop
+      - install -Dm444 ${FLATPAK_ID}.metainfo.xml ${FLATPAK_DEST}/share/metainfo/${FLATPAK_ID}.metainfo.xml
     sources:
-      - type: extra-data
-        filename: Minion.zip
-        sha256: 7ed2a5804462b6dec7d0f4f7b1b96b9279b71ed81939ef03f65f28d9e1c72e1e
-        size: 8046835
+      - type: archive
         url: https://cdn.mmoui.com/minion/v3/Minion3.0.11-java.zip
-        # Not using x-checker-data as the used version here is NOT available on the site
-        # but it IS added by the developers exclusively for the flatpak.
-        #
-        # The version for Minion3 will not change as the developers are working on Minion4
-        # and the flatpak will need to be manually updated for Minion4 support when it comes out.
-        #
-        # x-checker-data:
-        #   type: html
-        #   url: https://minion.mmoui.com/?download
-        #   pattern: "href=\"(https://cdn.mmoui.com/minion/v3/(Minion\\d+.\\d+.\\d+)-java.zip)\""
-      - type: script
-        dest-filename: apply-extra
-        commands:
-          - unzip -q Minion.zip
-          - mv Minion*-java/* .
-          - rm -rf __MACOSX Minion*-java
-          - rm Minion.zip
+        sha256: 7ed2a5804462b6dec7d0f4f7b1b96b9279b71ed81939ef03f65f28d9e1c72e1e
+        x-checker-data:
+          type: html
+          url: https://minion.mmoui.com/?download
+          pattern: "href=\"(https://cdn.mmoui.com/minion/v3/(Minion\\d+.\\d+.\\d+)-java.zip)\""
       - type: script
         dest-filename: minion.sh
         commands:
-          # If someone does press udpate it won't create a null folder + it won't hang the application
+          # If someone does press udpate it will create the /tmp/null
+          # folder but it won't hang the application as it's still in the
+          # mutable part of the sandbox. This is only here for the
+          # small amount of time before the automatic update kicks in.
           - cd /tmp
           - "java -jar --module-path /app/javafx/lib \
               --add-modules=javafx.graphics,javafx.fxml,javafx.web \
@@ -79,7 +75,7 @@ modules:
               --add-opens javafx.graphics/javafx.scene.image=ALL-UNNAMED \
               --add-opens javafx.graphics/com.sun.javafx.css=ALL-UNNAMED \
               --add-opens java.base/java.lang=ALL-UNNAMED \
-              /app/extra/Minion-jfx.jar"
+              /app/bin/minion.jar"
       - type: file
         path: gg.minion.Minion.png
       - type: file
