@@ -55,7 +55,7 @@ modules:
         x-checker-data:
           type: html
           url: https://minion.mmoui.com/?download
-          pattern: href="(https://cdn.mmoui.com/minion/v3/(Minion\d+.\d+.\d+)-java.zip)"
+          pattern: href="(https://cdn.mmoui.com/minion/v3/Minion(\d+.\d+.\d+)-java.zip)"
         strip-components: 0
       - type: script
         dest-filename: minion.sh
