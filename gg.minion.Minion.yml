@@ -13,7 +13,7 @@ finish-args:
   - --persist=.minion
   # Steam-specific folders
   - --filesystem=~/.steam
-  - --filesystem=~/.local/share/Steam
+  - --filesystem=xdg-data/Steam
   - --filesystem=~/.var/app/com.valvesoftware.Steam
   # Lutris installations
   - --filesystem=~/Games
