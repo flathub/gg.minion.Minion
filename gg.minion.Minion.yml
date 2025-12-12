@@ -1,6 +1,6 @@
 app-id: gg.minion.Minion
 runtime: org.freedesktop.Platform
-runtime-version: '24.08'
+runtime-version: '25.08'
 command: minion.sh
 sdk: org.freedesktop.Sdk
 tags:
